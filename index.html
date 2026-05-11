@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Y si yo también soy STEM?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=DM+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+  --text-hero: clamp(2.5rem, 1rem + 5vw, 5.5rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+  --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;
+  --radius-lg: 0.75rem; --radius-xl: 1rem; --radius-full: 9999px;
+  --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-theme="dark"] {
+  --color-bg: #0f0d14;
+  --color-surface: #16121f;
+  --color-surface-2: #1e1929;
+  --color-surface-offset: #251f33;
+  --color-divider: #2e2840;
+  --color-border: #3a3252;
+  --color-text: #e8e0f5;
+  --color-text-muted: #9b91b8;
+  --color-text-faint: #5e5578;
+  --color-text-inverse: #0f0d14;
+  --color-primary: #c084fc;
+  --color-primary-hover: #a855f7;
+  --color-accent: #f472b6;
+  --color-accent-hover: #ec4899;
+  --color-teal: #2dd4bf;
+  --color-gold: #fbbf24;
+  --color-success: #4ade80;
+  --color-error: #f87171;
+  --shadow-sm: 0 1px 4px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 4px 16px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 12px 40px oklch(0 0 0 / 0.5);
+}
+[data-theme="light"] {
+  --color-bg: #faf8ff;
+  --color-surface: #f3eeff;
+  --color-surface-2: #ede4ff;
+  --color-surface-offset: #e5d8ff;
+  --color-divider: #d8c8f8;
+  --color-border: #c9b5f0;
+  --color-text: #1a1228;
+  --color-text-muted: #6b5a8a;
+  --color-text-faint: #a898c0;
+  --color-text-inverse: #faf8ff;
+  --color-primary: #7c3aed;
+  --color-primary-hover: #6d28d9;
+  --color-accent: #db2777;
+  --color-accent-hover: #be185d;
+  --color-teal: #0d9488;
+  --color-gold: #d97706;
+  --color-success: #16a34a;
+  --color-error: #dc2626;
+  --shadow-sm: 0 1px 4px oklch(0.3 0.05 280 / 0.08);
+  --shadow-md: 0 4px 16px oklch(0.3 0.05 280 / 0.12);
+  --shadow-lg: 0 12px 40px oklch(0.3 0.05 280 / 0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-font-smoothing: antialiased; }
+body {
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background var(--transition), color var(--transition);
+  line-height: 1.6;
+}
+img { display: block; max-width: 100%; height: auto; }
+ul[role="list"] { list-style: none; }
+h1,h2,h3,h4 { text-wrap: balance; line-height: 1.15; }
+p, li { text-wrap: pretty; }
+button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+a, button, [role="button"] { transition: color var(--transition), background var(--transition), box-shadow var(--transition), transform var(--transition); }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+/* LAYOUT */
+.container { max-width: 1100px; margin-inline: auto; padding-inline: var(--space-6); }
+.container--narrow { max-width: 720px; margin-inline: auto; padding-inline: var(--space-6); }
+
+/* HEADER / NAV */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in oklch, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) 0;
+}
+.nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--color-accent); }
+.nav-links { display: flex; align-items: center; gap: var(--space-6); list-style: none; }
+.nav-links a {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+.nav-links a:hover { color: var(--color-text); }
+.theme-toggle {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-offset);
+  border: 1px solid var(--color-border);
+  display: grid; place-items: center;
+  color: var(--color-text-muted);
+}
+.theme-toggle:hover { color: var(--color-text); background: var(--color-surface-2); }
+.nav-mobile-menu { display: none; }
+
+/* HERO */
+.hero {
+  position: relative; overflow: hidden;
+  padding: clamp(var(--space-16), 10vw, 7rem) 0 clamp(var(--space-12), 8vw, 5rem);
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, oklch(0.55 0.25 300 / 0.15), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, oklch(0.6 0.22 340 / 0.12), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 0%, oklch(0.7 0.2 195 / 0.1), transparent 60%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  background: color-mix(in oklch, var(--color-primary) 15%, var(--color-surface));
+  border: 1px solid color-mix(in oklch, var(--color-primary) 30%, var(--color-border));
+  color: var(--color-primary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-6);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+  line-height: 1.05;
+}
+.hero-title em {
+  font-style: italic;
+  background: linear-gradient(135deg in oklch, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+.hero-meta-item {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+}
+.hero-meta-item svg { color: var(--color-primary); flex-shrink: 0; }
+.hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); }
+.btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-sm); font-weight: 600;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 24px color-mix(in oklch, var(--color-primary) 40%, transparent);
+}
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px color-mix(in oklch, var(--color-primary) 50%, transparent);
+}
+.btn-ghost {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+.btn-ghost:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* SECTION GENERIC */
+.section { padding: clamp(var(--space-12), 7vw, 5rem) 0; }
+.section-label {
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--color-primary);
+  margin-bottom: var(--space-3);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+}
+.section-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+  margin-bottom: var(--space-12);
+}
+.divider { border: none; border-top: 1px solid var(--color-divider); margin: 0; }
+
+/* OBJETIVOS */
+.objetivos-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px,100%), 1fr));
+  gap: var(--space-4); margin-top: var(--space-8);
+}
+.objetivo-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.objetivo-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in oklch, var(--color-primary) 50%, var(--color-border));
+}
+.objetivo-icon {
+  width: 44px; height: 44px;
+  background: color-mix(in oklch, var(--color-primary) 15%, var(--color-surface-2));
+  border-radius: var(--radius-lg);
+  display: grid; place-items: center;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+  font-size: 1.4rem;
+}
+.objetivo-title {
+  font-weight: 700; font-size: var(--text-sm);
+  color: var(--color-text); margin-bottom: var(--space-2);
+}
+.objetivo-desc { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* TIMELINE BLOQUES */
+.timeline { position: relative; }
+.timeline-track {
+  display: grid; gap: var(--space-6);
+}
+.bloque-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.bloque-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in oklch, var(--color-primary) 40%, var(--color-border));
+}
+.bloque-num {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: linear-gradient(135deg in oklch, var(--color-primary), var(--color-accent));
+  border-radius: var(--radius-lg);
+  display: grid; place-items: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xl); font-weight: 800;
+  color: white;
+  box-shadow: 0 4px 16px color-mix(in oklch, var(--color-primary) 40%, transparent);
+}
+.bloque-body {}
+.bloque-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-3); }
+.bloque-title { font-size: var(--text-lg); font-weight: 700; font-family: var(--font-display); color: var(--color-text); }
+.bloque-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.tag {
+  font-size: var(--text-xs); font-weight: 600;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid;
+}
+.tag-time { border-color: var(--color-teal); color: var(--color-teal); }
+.tag-mode { border-color: var(--color-gold); color: var(--color-gold); }
+.bloque-desc { font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-4); }
+.bloque-purpose {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  border-left: 2px solid var(--color-primary);
+  padding-left: var(--space-3);
+  font-style: italic;
+}
+.bloque-retos { margin-top: var(--space-4); }
+.bloque-retos-title { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); margin-bottom: var(--space-3); }
+.reto-item {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  margin-bottom: var(--space-2);
+}
+.reto-item::before { content: "⬡"; color: var(--color-accent); flex-shrink: 0; }
+
+/* MARCO TEORICO */
+.marco-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px,100%),1fr));
+  gap: var(--space-4); margin-top: var(--space-8);
+}
+.marco-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+.marco-enfoque {
+  font-family: var(--font-display);
+  font-size: var(--text-lg); font-weight: 700;
+  color: var(--color-primary); margin-bottom: var(--space-2);
+}
+.marco-autor { font-size: var(--text-xs); color: var(--color-text-faint); margin-bottom: var(--space-3); }
+.marco-desc { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* ========== STEM QUEST GAME ========== */
+.quest-section {
+  background: linear-gradient(160deg in oklch,
+    color-mix(in oklch, var(--color-primary) 8%, var(--color-bg)),
+    var(--color-bg)
+  );
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.quest-header {
+  text-align: center; padding-bottom: var(--space-10);
+}
+.quest-scoreboard {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4);
+  margin-bottom: var(--space-10);
+}
+.score-chip {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-6);
+  text-align: center; min-width: 130px;
+}
+.score-value {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl); font-weight: 800;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+  display: block;
+}
+.score-label { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.progress-bar-wrap {
+  background: var(--color-surface-offset); border-radius: var(--radius-full);
+  height: 8px; overflow: hidden; margin-bottom: var(--space-2);
+}
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg in oklch, var(--color-primary), var(--color-accent));
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 0%;
+}
+.progress-label { font-size: var(--text-xs); color: var(--color-text-muted); display: flex; justify-content: space-between; }
+
+/* Quest game area */
+#quest-game { max-width: 760px; margin-inline: auto; }
+.quest-start-screen, .quest-end-screen {
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-8);
+}
+.quest-emoji { font-size: 4rem; margin-bottom: var(--space-6); display: block; }
+.quest-title-big {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl); font-weight: 800;
+  color: var(--color-text); margin-bottom: var(--space-4);
+}
+.quest-intro { font-size: var(--text-base); color: var(--color-text-muted); max-width: 50ch; margin-inline: auto; margin-bottom: var(--space-8); }
+
+.question-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  display: none;
+}
+.question-card.active { display: block; }
+.question-level {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: var(--space-4);
+  padding: var(--space-1) var(--space-3); border-radius: var(--radius-full); border: 1px solid;
+}
+.level-1 { color: var(--color-success); border-color: var(--color-success); background: color-mix(in oklch, var(--color-success) 10%, transparent); }
+.level-2 { color: var(--color-gold); border-color: var(--color-gold); background: color-mix(in oklch, var(--color-gold) 10%, transparent); }
+.level-3 { color: var(--color-accent); border-color: var(--color-accent); background: color-mix(in oklch, var(--color-accent) 10%, transparent); }
+.question-text {
+  font-family: var(--font-display);
+  font-size: var(--text-xl); font-weight: 700;
+  color: var(--color-text); margin-bottom: var(--space-8); line-height: 1.3;
+}
+.question-hint {
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  background: var(--color-surface-2); border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4); margin-bottom: var(--space-6);
+  display: none;
+}
+.question-hint.visible { display: block; }
+.options-grid { display: grid; gap: var(--space-3); margin-bottom: var(--space-6); }
+.option-btn {
+  text-align: left;
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm); font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.option-btn::before {
+  content: attr(data-letter);
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: var(--color-surface-offset);
+  border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.option-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+  background: color-mix(in oklch, var(--color-primary) 8%, var(--color-surface-2));
+}
+.option-btn:hover:not(:disabled)::before { background: var(--color-primary); color: white; }
+.option-btn.correct {
+  border-color: var(--color-success);
+  background: color-mix(in oklch, var(--color-success) 12%, var(--color-surface-2));
+  color: var(--color-success);
+}
+.option-btn.correct::before { background: var(--color-success); color: white; }
+.option-btn.wrong {
+  border-color: var(--color-error);
+  background: color-mix(in oklch, var(--color-error) 12%, var(--color-surface-2));
+  color: var(--color-error);
+}
+.option-btn.wrong::before { background: var(--color-error); color: white; }
+.option-btn:disabled { cursor: default; }
+
+.feedback-box {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg); font-size: var(--text-sm);
+  margin-bottom: var(--space-6); display: none;
+}
+.feedback-box.visible { display: block; }
+.feedback-box.ok { background: color-mix(in oklch, var(--color-success) 12%, var(--color-surface)); color: var(--color-success); border: 1px solid color-mix(in oklch, var(--color-success) 30%, transparent); }
+.feedback-box.fail { background: color-mix(in oklch, var(--color-error) 12%, var(--color-surface)); color: var(--color-error); border: 1px solid color-mix(in oklch, var(--color-error) 30%, transparent); }
+
+.question-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.btn-answer {
+  flex: 1;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm); font-weight: 600;
+  cursor: pointer; border: 2px solid;
+  transition: all var(--transition);
+}
+.btn-confirm {
+  background: var(--color-primary); border-color: var(--color-primary); color: white;
+}
+.btn-confirm:hover:not(:disabled) { background: var(--color-primary-hover); border-color: var(--color-primary-hover); transform: translateY(-2px); }
+.btn-confirm:disabled { opacity: 0.4; cursor: default; }
+.btn-next {
+  background: var(--color-surface-2); border-color: var(--color-border); color: var(--color-text-muted);
+  display: none;
+}
+.btn-next.visible { display: inline-flex; }
+.btn-next:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.btn-hint {
+  background: transparent; border-color: var(--color-border); color: var(--color-text-muted);
+}
+.btn-hint:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+/* RESULT SCREEN */
+.result-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin: var(--space-6) 0; }
+.result-badge {
+  background: var(--color-surface-2); border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-lg);
+  font-size: var(--text-sm); color: var(--color-text-muted);
+  display: flex; align-items: center; gap: var(--space-2);
+}
+.result-badge .badge-num { font-family: var(--font-display); font-weight: 800; font-size: var(--text-xl); color: var(--color-primary); }
+
+/* MATERIALES */
+.materiales-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px,100%), 1fr)); gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+.material-item {
+  display: flex; align-items: flex-start; gap: var(--space-4);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); padding: var(--space-5);
+}
+.material-icon { font-size: 1.6rem; flex-shrink: 0; }
+.material-text { font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 500; }
+
+/* REFERENTES */
+.referentes-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px,100%), 1fr));
+  gap: var(--space-4); margin-top: var(--space-8);
+}
+.referente-card {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl); padding: var(--space-6); text-align: center;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.referente-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in oklch, var(--color-accent) 50%, var(--color-border));
+}
+.referente-emoji { font-size: 2.5rem; margin-bottom: var(--space-3); }
+.referente-name { font-weight: 700; font-size: var(--text-sm); color: var(--color-text); margin-bottom: var(--space-1); }
+.referente-field { font-size: var(--text-xs); color: var(--color-accent); }
+
+/* FOOTER */
+.site-footer {
+  border-top: 1px solid var(--color-divider);
+  padding: var(--space-10) 0;
+  text-align: center;
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+}
+.footer-logo { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; color: var(--color-primary); margin-bottom: var(--space-2); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-mobile-menu { display: grid; place-items: center; width: 40px; height: 40px; }
+  .bloque-card { grid-template-columns: 1fr; }
+  .bloque-num { width: 40px; height: 40px; }
+  .btn { padding: var(--space-3) var(--space-6); }
+}
+
+/* ANIMATIONS */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-up-2 { animation: fade-up 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-up-3 { animation: fade-up 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes score-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); color: var(--color-accent); }
+  100% { transform: scale(1); }
+}
+.score-pop { animation: score-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <nav class="nav container">
+    <a href="#inicio" class="nav-logo">STEM<span>Quest</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#objetivos">Objetivos</a></li>
+      <li><a href="#bloques">Programa</a></li>
+      <li><a href="#stemquest">STEM Quest</a></li>
+      <li><a href="#referentes">Referentes</a></li>
+      <li><a href="#materiales">Materiales</a></li>
+    </ul>
+    <button class="theme-toggle" data-theme-toggle aria-label="Cambiar modo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="container--narrow">
+    <div class="hero-badge fade-up">🔬 2.º Foro Mujeres STEM · Sur de Chihuahua</div>
+    <h1 class="hero-title fade-up-2">¿Y si yo también <em>soy STEM</em>?</h1>
+    <p class="hero-subtitle fade-up-3">Explorando la ciencia, la tecnología y la IA con ojos de mujer. Un taller interactivo de 2 horas que rompe estereotipos y fortalece tu identidad científica.</p>
+    <div class="hero-meta fade-up-3">
+      <div class="hero-meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        9 de abril de 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        2 horas de duración
+      </div>
+      <div class="hero-meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Nivel medio superior y superior
+      </div>
+      <div class="hero-meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        TecNM · Cd. Jiménez
+      </div>
+    </div>
+    <div class="hero-cta fade-up-3">
+      <a href="#bloques" class="btn btn-primary">Ver el programa</a>
+      <a href="#stemquest" class="btn btn-ghost">Jugar STEM Quest</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- OBJETIVOS -->
+<section id="objetivos" class="section">
+  <div class="container">
+    <div class="section-label">Propósitos</div>
+    <h2 class="section-title">Objetivos del taller</h2>
+    <p class="section-subtitle">Desarrollar competencias críticas para el uso de herramientas de IA como apoyo en la formación y exploración en áreas STEM, con perspectiva de género.</p>
+    <div class="objetivos-grid">
+      <div class="objetivo-card">
+        <div class="objetivo-icon">⚧️</div>
+        <div class="objetivo-title">Reflexión de género en STEM</div>
+        <div class="objetivo-desc">Analizar críticamente las brechas de género en ciencia y tecnología en el contexto mexicano y regional.</div>
+      </div>
+      <div class="objetivo-card">
+        <div class="objetivo-icon">🤖</div>
+        <div class="objetivo-title">IA ética y fundamentada</div>
+        <div class="objetivo-desc">Explorar el uso ético y epistemológicamente sustentado de la inteligencia artificial en procesos de aprendizaje.</div>
+      </div>
+      <div class="objetivo-card">
+        <div class="objetivo-icon">🎮</div>
+        <div class="objetivo-title">Gamificación didáctica</div>
+        <div class="objetivo-desc">Vivenciar estrategias de gamificación como metodología innovadora que potencia la motivación intrínseca.</div>
+      </div>
+      <div class="objetivo-card">
+        <div class="objetivo-icon">🔭</div>
+        <div class="objetivo-title">Identidad científica</div>
+        <div class="objetivo-desc">Fortalecer el sentido de pertenencia e identidad científica en las participantes como futuras agentes STEM.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MARCO TEÓRICO -->
+<section class="section" style="background: color-mix(in oklch, var(--color-primary) 4%, var(--color-bg));">
+  <div class="container">
+    <div class="section-label">Fundamentos</div>
+    <h2 class="section-title">Marco teórico</h2>
+    <p class="section-subtitle">El taller integra cuatro enfoques teóricos que guían el diseño didáctico y la interpretación de los aprendizajes.</p>
+    <div class="marco-grid">
+      <div class="marco-card">
+        <div class="marco-enfoque">Socioepistemología</div>
+        <div class="marco-autor">Cantoral, R. (2013)</div>
+        <div class="marco-desc">Reconoce la construcción social del conocimiento matemático y científico en contextos culturales específicos.</div>
+      </div>
+      <div class="marco-card">
+        <div class="marco-enfoque">Gamificación educativa</div>
+        <div class="marco-autor">Deterding et al. (2011)</div>
+        <div class="marco-desc">Uso de mecánicas lúdicas —puntos, niveles, retos— para potenciar la motivación y el aprendizaje significativo.</div>
+      </div>
+      <div class="marco-card">
+        <div class="marco-enfoque">Ingeniería Didáctica</div>
+        <div class="marco-autor">Artigue, M. (1992)</div>
+        <div class="marco-desc">Diseño de situaciones adidácticas que favorecen la construcción autónoma del saber y la validación interna.</div>
+      </div>
+      <div class="marco-card">
+        <div class="marco-enfoque">TAD</div>
+        <div class="marco-autor">Chevallard, Y. (1999)</div>
+        <div class="marco-desc">Transposición didáctica y organización praxeológica del saber: tareas, técnicas, tecnología y teoría.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BLOQUES / PROGRAMA -->
+<section id="bloques" class="section">
+  <div class="container">
+    <div class="section-label">Secuencia didáctica</div>
+    <h2 class="section-title">Programa del taller</h2>
+    <p class="section-subtitle">Seis bloques articulados que progresan desde la activación identitaria hasta la proyección vocacional.</p>
+
+    <div class="timeline-track">
+
+      <!-- Bloque 1 -->
+      <div class="bloque-card">
+        <div class="bloque-num">1</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">Rompehielo identitario</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 15 min</span>
+              <span class="tag tag-mode">👥 Presencial-participativa</span>
+            </div>
+          </div>
+          <div class="bloque-desc">Cada participante menciona o descubre una mujer referente en STEM. Se proyectan imágenes de Maryam Mirzakhani, Katherine Johnson, Julieta Fierro y otras figuras históricas y contemporáneas de la ciencia.</div>
+          <div class="bloque-purpose">Propósito: Activar identificación y romper estereotipos de género en ciencia desde el reconocimiento de referentes reales.</div>
+        </div>
+      </div>
+
+      <!-- Bloque 2 -->
+      <div class="bloque-card">
+        <div class="bloque-num">2</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">Provocación conceptual</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 15 min</span>
+              <span class="tag tag-mode">🗣 Expositiva-dialógica</span>
+            </div>
+          </div>
+          <div class="bloque-desc">Mini-charla: ¿Por qué hay pocas mujeres en STEM y qué tiene que ver la IA con eso? Datos del contexto mexicano presentados con infografía (IMCO, 2026). La facilitadora comparte brevemente su trayectoria como referente femenino.</div>
+          <div class="bloque-purpose">Propósito: Contextualizar la problemática sin academizar en exceso, generando tensión epistémica en las participantes.</div>
+        </div>
+      </div>
+
+      <!-- Bloque 3 -->
+      <div class="bloque-card">
+        <div class="bloque-num">3</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">Exploración práctica con IA</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 35 min</span>
+              <span class="tag tag-mode">🤝 Trabajo colaborativo</span>
+            </div>
+          </div>
+          <div class="bloque-desc">En equipos de 3–4, cada grupo recibe un reto STEM situado en el contexto de Chihuahua y lo resuelven usando IA como colaboradora crítica, no como fuente de verdad absoluta.</div>
+          <div class="bloque-purpose">Propósito: Desarrollar pensamiento crítico mediado por IA a través de aprendizaje situado y colaborativo.</div>
+          <div class="bloque-retos">
+            <div class="bloque-retos-title">🌵 Retos contextualizados</div>
+            <div class="reto-item">Calcular la huella de carbono de una vivienda típica de Chihuahua</div>
+            <div class="reto-item">Analizar datos de temperatura extrema y proponer soluciones de ingeniería local</div>
+            <div class="reto-item">Diseñar un sistema de riego eficiente para cultivos del sur del estado</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloque 4 -->
+      <div class="bloque-card">
+        <div class="bloque-num">4</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">STEM Quest 🎮</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 25 min</span>
+              <span class="tag tag-mode">🏆 Lúdica-reflexiva</span>
+            </div>
+          </div>
+          <div class="bloque-desc">Quiz gamificado con tres niveles de dificultad y sistema de puntuación. Las participantes distinguen cuándo la IA ayuda y cuándo puede engañar, resuelven retos de lógica y responden preguntas de ciencia aplicada.</div>
+          <div class="bloque-purpose">Propósito: Consolidar aprendizajes con motivación intrínseca. Mecánicas: puntos, niveles progresivos, retos por pistas, trabajo en equipo.</div>
+        </div>
+      </div>
+
+      <!-- Bloque 5 -->
+      <div class="bloque-card">
+        <div class="bloque-num">5</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">Plenaria vocacional</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 15 min</span>
+              <span class="tag tag-mode">💬 Dialógica-reflexiva</span>
+            </div>
+          </div>
+          <div class="bloque-desc">Círculo de reflexión con preguntas generadoras: ¿Qué descubrí hoy sobre mí y sobre la ciencia? ¿Cómo me imagino en un área STEM? ¿Qué barreras identifico y cómo podría superarlas?</div>
+          <div class="bloque-purpose">Propósito: Institucionalizar el aprendizaje y proyectar identidad STEM hacia el futuro vocacional.</div>
+        </div>
+      </div>
+
+      <!-- Bloque 6 -->
+      <div class="bloque-card">
+        <div class="bloque-num">6</div>
+        <div class="bloque-body">
+          <div class="bloque-header">
+            <div class="bloque-title">Cierre y recursos</div>
+            <div class="bloque-tags">
+              <span class="tag tag-time">⏱ 10 min</span>
+              <span class="tag tag-mode">📲 Individual-colectiva</span>
+            </div>
+          </div>
+          <div class="bloque-desc">Entrega de QR con recursos gratuitos: Khan Academy, Coursera STEM, convocatoria British Council Mujeres en STEM 2026. Fotografía grupal y encuesta de cierre formativa.</div>
+          <div class="bloque-purpose">Propósito: Vincular a las participantes con la comunidad STEM real y ofrecer rutas concretas de continuidad.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STEM QUEST GAME -->
+<section id="stemquest" class="section quest-section">
+  <div class="container">
+    <div class="quest-header">
+      <div class="section-label">Bloque 4 — Gamificación</div>
+      <h2 class="section-title">STEM Quest</h2>
+      <p class="section-subtitle">Tres niveles de dificultad, 9 preguntas. Demuestra que la ciencia es tuya. ¿Cuándo ayuda la IA y cuándo engaña?</p>
+      <div class="quest-scoreboard">
+        <div class="score-chip">
+          <span class="score-value" id="score-display">0</span>
+          <span class="score-label">Puntos</span>
+        </div>
+        <div class="score-chip">
+          <span class="score-value" id="q-display">0/9</span>
+          <span class="score-label">Preguntas</span>
+        </div>
+        <div class="score-chip">
+          <span class="score-value" id="level-display">—</span>
+          <span class="score-label">Nivel</span>
+        </div>
+      </div>
+      <div style="max-width:500px;margin-inline:auto;margin-bottom:var(--space-4)">
+        <div class="progress-bar-wrap"><div class="progress-bar-inner" id="progress-bar"></div></div>
+        <div class="progress-label"><span>Inicio</span><span id="progress-text">0 de 9 respondidas</span></div>
+      </div>
+    </div>
+
+    <div id="quest-game">
+      <!-- START -->
+      <div class="quest-start-screen" id="quest-start">
+        <span class="quest-emoji">🚀</span>
+        <div class="quest-title-big">¿Lista para el reto?</div>
+        <p class="quest-intro">9 preguntas distribuidas en 3 niveles: Exploración (verde), Análisis (dorado) y Desafío (rosa). Cada respuesta correcta suma puntos. ¡Puedes pedir una pista pero costará puntos!</p>
+        <button class="btn btn-primary" id="btn-start-quest" style="margin:auto">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Comenzar STEM Quest
+        </button>
+      </div>
+
+      <!-- QUESTIONS (JS generated) -->
+      <div id="quest-questions"></div>
+
+      <!-- END -->
+      <div class="quest-end-screen" id="quest-end" style="display:none">
+        <span class="quest-emoji" id="end-emoji">🏆</span>
+        <div class="quest-title-big" id="end-title">¡Misión completada!</div>
+        <p class="quest-intro" id="end-msg"></p>
+        <div class="result-badges" id="result-badges"></div>
+        <button class="btn btn-primary" id="btn-restart" style="margin:auto;margin-top:var(--space-6)">
+          🔄 Jugar de nuevo
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- REFERENTES -->
+<section id="referentes" class="section">
+  <div class="container">
+    <div class="section-label">Bloque 1 · Identidad</div>
+    <h2 class="section-title">Mujeres que hicieron ciencia</h2>
+    <p class="section-subtitle">Referentes históricas y contemporáneas cuyo trabajo transformó la ciencia, la tecnología y las matemáticas.</p>
+    <div class="referentes-grid">
+      <div class="referente-card">
+        <div class="referente-emoji">🧮</div>
+        <div class="referente-name">Katherine Johnson</div>
+        <div class="referente-field">Matemáticas · NASA</div>
+      </div>
+      <div class="referente-card">
+        <div class="referente-emoji">🏅</div>
+        <div class="referente-name">Maryam Mirzakhani</div>
+        <div class="referente-field">Matemáticas · Medalla Fields</div>
+      </div>
+      <div class="referente-card">
+        <div class="referente-emoji">🌌</div>
+        <div class="referente-name">Julieta Fierro</div>
+        <div class="referente-field">Astrofísica · UNAM</div>
+      </div>
+      <div class="referente-card">
+        <div class="referente-emoji">💊</div>
+        <div class="referente-name">Marie Curie</div>
+        <div class="referente-field">Física y Química · 2× Nobel</div>
+      </div>
+      <div class="referente-card">
+        <div class="referente-emoji">💻</div>
+        <div class="referente-name">Ada Lovelace</div>
+        <div class="referente-field">Matemáticas · Primer algoritmo</div>
+      </div>
+      <div class="referente-card">
+        <div class="referente-emoji">🧬</div>
+        <div class="referente-name">Rosalind Franklin</div>
+        <div class="referente-field">Biofísica · Estructura del ADN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MATERIALES -->
+<section id="materiales" class="section">
+  <div class="container">
+    <div class="section-label">Logística</div>
+    <h2 class="section-title">Materiales y evaluación</h2>
+    <p class="section-subtitle">El taller está diseñado para funcionar desde el celular, sin instalaciones previas. Evaluación formativa durante todo el proceso.</p>
+    <div class="materiales-list">
+      <div class="material-item"><div class="material-icon">📡</div><div class="material-text">Proyector y conexión a internet</div></div>
+      <div class="material-item"><div class="material-icon">🃏</div><div class="material-text">Tarjetas impresas con retos STEM para grupos sin dispositivo</div></div>
+      <div class="material-item"><div class="material-icon">📲</div><div class="material-text">Códigos QR para recursos y herramientas de IA gratuitas</div></div>
+      <div class="material-item"><div class="material-icon">🏆</div><div class="material-text">Tablero de puntuación visible para STEM Quest</div></div>
+      <div class="material-item"><div class="material-icon">📋</div><div class="material-text">Formulario de evaluación en papel o Google Forms</div></div>
+    </div>
+    <div style="margin-top:var(--space-10); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-8);">
+      <div class="section-label" style="margin-bottom:var(--space-4)">Evaluación formativa</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,100%),1fr));gap:var(--space-4);">
+        <div style="font-size:var(--text-sm);color:var(--color-text-muted);padding:var(--space-4);background:var(--color-surface-2);border-radius:var(--radius-lg);">
+          <strong style="color:var(--color-text);display:block;margin-bottom:var(--space-2)">🔍 Observación participante</strong>
+          Registro de participación, interacción entre pares y actitudes hacia la ciencia.
+        </div>
+        <div style="font-size:var(--text-sm);color:var(--color-text-muted);padding:var(--space-4);background:var(--color-surface-2);border-radius:var(--radius-lg);">
+          <strong style="color:var(--color-text);display:block;margin-bottom:var(--space-2)">📝 Formulario de cierre</strong>
+          Preguntas sobre aprendizajes, emociones y proyecciones vocacionales post-taller.
+        </div>
+        <div style="font-size:var(--text-sm);color:var(--color-text-muted);padding:var(--space-4);background:var(--color-surface-2);border-radius:var(--radius-lg);">
+          <strong style="color:var(--color-text);display:block;margin-bottom:var(--space-2)">💬 Reflexión plenaria</strong>
+          Síntesis colectiva de aprendizajes con preguntas generadoras en el bloque final.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-logo">STEM<span style="color:var(--color-accent)">Quest</span></div>
+    <p>2.º Foro Mujeres STEM · Sur de Chihuahua · TecNM Cd. Jiménez · 2026</p>
+    <p style="margin-top:var(--space-2); font-size:var(--text-xs);">Diseñado con marco teórico: Cantoral (2013) · Artigue (1992) · Chevallard (1999) · Deterding et al. (2011)</p>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  const btn = document.querySelector('[data-theme-toggle]');
+  const html = document.documentElement;
+  let theme = 'dark';
+  html.setAttribute('data-theme', theme);
+  function setIcon(t) {
+    btn.innerHTML = t === 'dark'
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+  setIcon(theme);
+  btn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', theme);
+    setIcon(theme);
+  });
+})();
+
+// ===================== STEM QUEST GAME =====================
+const QUESTIONS = [
+  // NIVEL 1 — Exploración (10 pts)
+  {
+    level: 1, levelLabel: '🟢 Nivel 1 · Exploración', levelClass: 'level-1', points: 10,
+    text: '¿Qué porcentaje aproximado de investigadoras mujeres hay en México según datos recientes?',
+    hint: 'Piensa en menos de la mitad... y bastante menos.',
+    options: ['Alrededor del 50%', 'Alrededor del 35%', 'Menos del 20%', 'Más del 60%'],
+    correct: 1,
+    feedback: '¡Correcto! Alrededor del 35% de investigadoras en el SNI son mujeres (CONACYT, 2023). La brecha es real, pero se está reduciendo.'
+  },
+  {
+    level: 1, levelLabel: '🟢 Nivel 1 · Exploración', levelClass: 'level-1', points: 10,
+    text: '¿Cuál fue el mayor logro científico de Katherine Johnson en la NASA?',
+    hint: 'Calculó algo que era literalmente una cuestión de vida o muerte para los astronautas.',
+    options: ['Diseñó el primer cohete lunar', 'Calculó las trayectorias orbitales para vuelos espaciales', 'Inventó el software de navegación GPS', 'Dirigió la misión Apolo 13'],
+    correct: 1,
+    feedback: '¡Exacto! Katherine Johnson calculó manualmente las trayectorias orbitales de las primeras misiones espaciales de EE.UU. Su precisión fue crucial para el éxito del programa Apollo.'
+  },
+  {
+    level: 1, levelLabel: '🟢 Nivel 1 · Exploración', levelClass: 'level-1', points: 10,
+    text: '¿Qué significa que una IA tenga "alucinaciones"?',
+    hint: 'No es que la IA vea cosas raras... sino que dice cosas que...',
+    options: ['Que la IA aprende muy rápido', 'Que la IA genera información falsa con apariencia de veraz', 'Que la IA no puede responder preguntas difíciles', 'Que la IA necesita más datos para funcionar'],
+    correct: 1,
+    feedback: '¡Muy bien! Las "alucinaciones" de la IA son respuestas que suenan confiables pero son incorrectas o inventadas. Por eso es esencial verificar la información con fuentes primarias.'
+  },
+  // NIVEL 2 — Análisis (20 pts)
+  {
+    level: 2, levelLabel: '🟡 Nivel 2 · Análisis', levelClass: 'level-2', points: 20,
+    text: 'Chihuahua tiene temperaturas que superan los 45°C en verano. ¿Cuál sería la estrategia de ingeniería más eficiente para reducir la temperatura interior de una vivienda?',
+    hint: 'Piensa en lo que ya se usaba en arquitectura vernácula del desierto.',
+    options: ['Instalar más aires acondicionados de mayor potencia', 'Usar techos y muros de colores oscuros para absorber calor', 'Implementar ventilación cruzada, aislamientos y techos verdes', 'Construir ventanas más grandes para mayor ventilación'],
+    correct: 2,
+    feedback: '¡Correcto! La ventilación cruzada, aislamientos térmicos y techos verdes son estrategias pasivas que reducen consumo energético hasta un 40%. La arquitectura bioclimática ya lo sabía antes que la IA.'
+  },
+  {
+    level: 2, levelLabel: '🟡 Nivel 2 · Análisis', levelClass: 'level-2', points: 20,
+    text: 'En la Ingeniería Didáctica (Artigue, 1992), ¿qué es una "situación adidáctica"?',
+    hint: 'La palabra clave es "sin" la intervención directa del docente...',
+    options: ['Una situación donde el docente explica directamente el conocimiento', 'Una actividad donde el estudiante construye el saber sin intervención directa del docente', 'Un examen tradicional de evaluación sumativa', 'Un problema sin solución conocida'],
+    correct: 1,
+    feedback: '¡Excelente! Artigue (1992) define la situación adidáctica como aquella en que el estudiante interactúa con el problema sin que el docente intervenga, construyendo el saber de forma autónoma mediante retroalimentación del propio medio.'
+  },
+  {
+    level: 2, levelLabel: '🟡 Nivel 2 · Análisis', levelClass: 'level-2', points: 20,
+    text: 'Si usas IA para calcular la huella de carbono de tu hogar, ¿cuál es el paso más importante ANTES de aceptar el resultado?',
+    hint: 'La IA no tiene acceso a datos locales de Chihuahua a menos que tú se los des.',
+    options: ['Aceptar el resultado si parece razonable', 'Verificar los datos de entrada y contrastar con fuentes oficiales locales', 'Repetir la pregunta tres veces para confirmar', 'Usar otra IA diferente para comparar'],
+    correct: 1,
+    feedback: '¡Correcto! La IA trabaja con los datos que le proporcionas y con su entrenamiento general. Verificar fuentes (SEMARNAT, CFE, CONAGUA) y contextualizar al sur de Chihuahua es esencial para un cálculo válido.'
+  },
+  // NIVEL 3 — Desafío (30 pts)
+  {
+    level: 3, levelLabel: '🔥 Nivel 3 · Desafío', levelClass: 'level-3', points: 30,
+    text: 'Maryam Mirzakhani fue la primera mujer en ganar la Medalla Fields (2014). ¿En qué área de las matemáticas trabajó principalmente?',
+    hint: 'Imagina superficies que se tuercen, se doblan y tienen geometrías imposibles de ver...',
+    options: ['Estadística y probabilidad aplicada', 'Geometría de superficies de Riemann y dinámica de sistemas', 'Álgebra lineal y matrices', 'Cálculo diferencial e integral clásico'],
+    correct: 1,
+    feedback: '¡Brillante! Mirzakhani trabajó en geometría de superficies de Riemann, teoría de Teichmüller y sistemas dinámicos. Sus resultados resolvieron problemas que habían estado abiertos por décadas.'
+  },
+  {
+    level: 3, levelLabel: '🔥 Nivel 3 · Desafío', levelClass: 'level-3', points: 30,
+    text: 'La socioepistemología (Cantoral, 2013) propone que el conocimiento matemático se construye socialmente. ¿Qué implicación didáctica tiene esto para el diseño del taller?',
+    hint: 'Si el conocimiento es social, la actividad no puede ser individual ni descontextualizada.',
+    options: ['Las actividades deben ser individuales para medir el conocimiento puro', 'Los problemas deben descontextualizarse para mayor rigor', 'Las situaciones deben surgir de prácticas sociales situadas y promover interacción', 'El docente debe transmitir el saber terminado sin modificarlo'],
+    correct: 2,
+    feedback: '¡Excelente análisis! La socioepistemología postula que el saber matemático emerge de prácticas sociales específicas. Por eso este taller usa retos situados en Chihuahua: el contexto no es decoración, es condición epistemológica del aprendizaje.'
+  },
+  {
+    level: 3, levelLabel: '🔥 Nivel 3 · Desafío', levelClass: 'level-3', points: 30,
+    text: 'Una IA te genera un texto académico con citas a Vygotsky, Piaget y Freire sobre gamificación en STEM. ¿Cuál es el riesgo epistemológico más grave?',
+    hint: 'No es que esté mal citado... es algo más profundo sobre la naturaleza del texto generado.',
+    options: ['Que el formato de las citas no sea APA', 'Que las citas sean inventadas o descontextualizadas, presentando síntesis superficial como conocimiento verificado', 'Que el texto sea muy largo para leer', 'Que falten referencias de autores latinoamericanos'],
+    correct: 1,
+    feedback: '¡Respuesta experta! La IA puede "alucinar" referencias que suenan plausibles pero no existen, o contextualizar mal el pensamiento de los autores. Siempre verifica las citas en fuentes primarias indexadas (Scopus, WoS, SciELO). El riesgo es epistemológico: pasar síntesis superficial por conocimiento.'
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = 0;
+let selectedOption = null;
+let hintUsed = false;
+
+const scoreDisplay = document.getElementById('score-display');
+const qDisplay = document.getElementById('q-display');
+const levelDisplay = document.getElementById('level-display');
+const progressBar = document.getElementById('progress-bar');
+const progressText = document.getElementById('progress-text');
+
+function updateScore(pts) {
+  score += pts;
+  scoreDisplay.textContent = score;
+  scoreDisplay.classList.remove('score-pop');
+  void scoreDisplay.offsetWidth;
+  scoreDisplay.classList.add('score-pop');
+}
+
+function updateProgress() {
+  const pct = (answered / QUESTIONS.length) * 100;
+  progressBar.style.width = pct + '%';
+  progressText.textContent = answered + ' de ' + QUESTIONS.length + ' respondidas';
+  qDisplay.textContent = answered + '/' + QUESTIONS.length;
+}
+
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  levelDisplay.textContent = 'Nivel ' + q.level;
+
+  const card = document.createElement('div');
+  card.className = 'question-card active';
+  card.id = 'qcard-' + idx;
+
+  const letters = ['A','B','C','D'];
+  card.innerHTML = `
+    <div class="question-level ${q.levelClass}">${q.levelLabel} · ${q.points} pts</div>
+    <div class="question-text">${q.text}</div>
+    <div class="question-hint" id="hint-${idx}">💡 <strong>Pista:</strong> ${q.hint}</div>
+    <div class="options-grid" id="options-${idx}">
+      ${q.options.map((opt, i) => `
+        <button class="option-btn" data-index="${i}" data-letter="${letters[i]}" onclick="selectOption(${idx}, ${i})">${opt}</button>
+      `).join('')}
+    </div>
+    <div class="feedback-box" id="feedback-${idx}"></div>
+    <div class="question-actions">
+      <button class="btn-answer btn-hint" id="btn-hint-${idx}" onclick="showHint(${idx})">💡 Pista (−5 pts)</button>
+      <button class="btn-answer btn-confirm" id="btn-confirm-${idx}" onclick="confirmAnswer(${idx})" disabled>Confirmar</button>
+      <button class="btn-answer btn-next" id="btn-next-${idx}" onclick="nextQuestion(${idx})">
+        ${idx < QUESTIONS.length - 1 ? 'Siguiente →' : 'Ver resultados 🏆'}
+      </button>
+    </div>
+  `;
+  document.getElementById('quest-questions').appendChild(card);
+}
+
+function selectOption(qIdx, optIdx) {
+  if (document.getElementById('btn-confirm-' + qIdx).disabled === false &&
+      document.getElementById('btn-next-' + qIdx).classList.contains('visible')) return;
+  selectedOption = optIdx;
+  const btns = document.querySelectorAll(`#options-${qIdx} .option-btn`);
+  btns.forEach(b => b.classList.remove('selected'));
+  btns[optIdx].style.borderColor = 'var(--color-primary)';
+  btns[optIdx].style.color = 'var(--color-text)';
+  document.getElementById('btn-confirm-' + qIdx).disabled = false;
+}
+
+function showHint(qIdx) {
+  if (!hintUsed) {
+    hintUsed = true;
+    score = Math.max(0, score - 5);
+    scoreDisplay.textContent = score;
+    document.getElementById('hint-' + qIdx).classList.add('visible');
+    document.getElementById('btn-hint-' + qIdx).disabled = true;
+    document.getElementById('btn-hint-' + qIdx).style.opacity = '0.4';
+  }
+}
+
+function confirmAnswer(qIdx) {
+  if (selectedOption === null) return;
+  const q = QUESTIONS[qIdx];
+  const btns = document.querySelectorAll(`#options-${qIdx} .option-btn`);
+  btns.forEach(b => { b.disabled = true; b.style.borderColor = ''; b.style.color = ''; });
+
+  const feedback = document.getElementById('feedback-' + qIdx);
+  feedback.classList.add('visible');
+
+  if (selectedOption === q.correct) {
+    btns[selectedOption].classList.add('correct');
+    feedback.classList.add('ok');
+    feedback.innerHTML = '✅ ' + q.feedback;
+    updateScore(q.points);
+  } else {
+    btns[selectedOption].classList.add('wrong');
+    btns[q.correct].classList.add('correct');
+    feedback.classList.add('fail');
+    feedback.innerHTML = '❌ No era esa. La correcta es la opción ' + ['A','B','C','D'][q.correct] + '. ' + q.feedback;
+  }
+
+  answered++;
+  updateProgress();
+  hintUsed = false;
+  selectedOption = null;
+  document.getElementById('btn-confirm-' + qIdx).disabled = true;
+  document.getElementById('btn-next-' + qIdx).classList.add('visible');
+}
+
+function nextQuestion(qIdx) {
+  document.getElementById('qcard-' + qIdx).style.display = 'none';
+  if (qIdx < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQuestion(currentQ);
+  } else {
+    showEndScreen();
+  }
+}
+
+function showEndScreen() {
+  document.getElementById('quest-end').style.display = 'block';
+  const maxScore = QUESTIONS.reduce((s, q) => s + q.points, 0);
+  const pct = score / maxScore;
+  let emoji, title, msg;
+  if (pct >= 0.85) {
+    emoji = '🏆'; title = '¡Científica de élite!';
+    msg = 'Obtuviste ' + score + ' de ' + maxScore + ' puntos posibles. Tu pensamiento crítico y tu conocimiento son impresionantes. ¡El mundo STEM te necesita!';
+  } else if (pct >= 0.6) {
+    emoji = '⭐'; title = '¡Muy bien hecho!';
+    msg = 'Obtuviste ' + score + ' de ' + maxScore + ' puntos. Tienes bases sólidas y una mente analítica. ¡Sigue explorando!';
+  } else {
+    emoji = '🌱'; title = '¡Buen comienzo!';
+    msg = 'Obtuviste ' + score + ' de ' + maxScore + ' puntos. La ciencia es un camino, no un destino. Cada pregunta que no supiste es una puerta que acaba de abrirse para ti.';
+  }
+  document.getElementById('end-emoji').textContent = emoji;
+  document.getElementById('end-title').textContent = title;
+  document.getElementById('end-msg').textContent = msg;
+  document.getElementById('result-badges').innerHTML = `
+    <div class="result-badge"><span class="badge-num">${score}</span> Puntos totales</div>
+    <div class="result-badge"><span class="badge-num">${answered}</span> Respondidas</div>
+    <div class="result-badge"><span class="badge-num">${maxScore}</span> Pts máximos</div>
+  `;
+}
+
+function resetGame() {
+  currentQ = 0; score = 0; answered = 0; selectedOption = null; hintUsed = false;
+  scoreDisplay.textContent = '0';
+  qDisplay.textContent = '0/9';
+  levelDisplay.textContent = '—';
+  progressBar.style.width = '0%';
+  progressText.textContent = '0 de 9 respondidas';
+  document.getElementById('quest-questions').innerHTML = '';
+  document.getElementById('quest-end').style.display = 'none';
+  document.getElementById('quest-start').style.display = 'block';
+}
+
+document.getElementById('btn-start-quest').addEventListener('click', () => {
+  document.getElementById('quest-start').style.display = 'none';
+  renderQuestion(0);
+});
+document.getElementById('btn-restart').addEventListener('click', resetGame);
+</script>
+</body>
+</html>
